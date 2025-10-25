@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>헬로 월드 - 서버 개발 동아리</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* 기본 설정 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Noto Sans KR', 'Segoe UI', sans-serif;
+        }
+
+        body {
+            background-color: #f9fafb;
+            color: #2d2d2d;
+            line-height: 1.7;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        /* 헤더 */
+        header {
+            background: white;
+            padding: 40px 30px;
+            border-radius: 20px;
+            margin-bottom: 40px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+            text-align: center;
+        }
+
+        .logo {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .logo-icon {
+            font-size: 3rem;
+            color: #4a6cf7;
+            margin-right: 12px;
+        }
+
+        h1 {
+            font-size: 2.4rem;
+            color: #111827;
+            letter-spacing: -0.5px;
+        }
+
+        .profile {
+            margin-top: 20px;
+        }
+
+        .profile-img {
+            width: 140px;
+            height: 140px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid #e5e7eb;
+            margin-bottom: 15px;
+            transition: transform 0.3s ease;
+        }
+
+        .profile-img:hover {
+            transform: scale(1.05);
+        }
+
+        p {
+            color: #4b5563;
+            margin-bottom: 12px;
+        }
+
+        .highlight {
+            color: #4a6cf7;
+            font-weight: 600;
+        }
+
+        .btn {
+            display: inline-block;
+            background: #4a6cf7;
+            color: white;
+            padding: 12px 28px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 500;
+            margin: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .btn:hover {
+            background: #334ac0;
+            transform: translateY(-2px);
+        }
+
+        /* 섹션 */
+        .section {
+            background: white;
+            padding: 35px;
+            border-radius: 18px;
+            margin-bottom: 40px;
+            box-shadow: 0 3px 15px rgba(0, 0, 0, 0.04);
+        }
+
+        h2 {
+            font-size: 1.9rem;
+            color: #111827;
+            margin-bottom: 20px;
+        }
+
+        h3 {
+            color: #1f2937;
+            margin: 15px 0 8px;
+        }
+
+        /* 스킬바 */
+        .skills {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+
+        .skill {
+            flex-basis: 48%;
+            margin-bottom: 15px;
+        }
+
+        .skill-bar {
+            height: 14px;
+            background: #e5e7eb;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .skill-level {
+            height: 100%;
+            background: #4a6cf7;
+            text-align: right;
+            color: white;
+            font-size: 0.85rem;
+            padding-right: 8px;
+            border-radius: 10px;
+        }
+
+        /* 활동 */
+        .activity {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 25px;
+        }
+
+        .activity-icon {
+            font-size: 1.8rem;
+            color: #4a6cf7;
+            margin-right: 20px;
+            flex-shrink: 0;
+        }
+
+        /* 프로젝트 */
+        .projects {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 25px;
+        }
+
+        .project {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease;
+        }
+
+        .project:hover {
+            transform: translateY(-5px);
+        }
+
+        .project-img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .project-content {
+            padding: 20px;
+        }
+
+        /* 갤러리 */
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+        }
+
+        .gallery-img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            border-radius: 12px;
+            transition: transform 0.3s ease;
+        }
+
+        .gallery-img:hover {
+            transform: scale(1.05);
+        }
+
+        /* 영상 */
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
+            border-radius: 15px;
+            margin-top: 20px;
+        }
+
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        /* 푸터 */
+        footer {
+            text-align: center;
+            padding: 40px;
+            color: #6b7280;
+            font-size: 0.95rem;
+        }
+
+        .social-icons a {
+            color: #6b7280;
+            font-size: 1.6rem;
+            margin: 0 12px;
+            transition: all 0.3s ease;
+        }
+
+        .social-icons a:hover {
+            color: #4a6cf7;
+            transform: translateY(-3px);
+        }
+
+        @media (max-width: 768px) {
+            .skill {
+                flex-basis: 100%;
+            }
+
+            .activity {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .activity-icon {
+                margin-bottom: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- 헤더 -->
+        <header>
+            <div class="logo">
+                <i class="fas fa-server logo-icon"></i>
+                <h1>헬로 월드 동아리</h1>
+            </div>
+            <div class="profile">
+                <img src="https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&w=400&q=80" class="profile-img" alt="동아리 대표 이미지">
+                <p>서버 개발과 컴퓨터 공부를 위한 <span class="highlight">최고의 동아리</span></p>
+                <div>
+                    <a href="#about" class="btn">동아리 소개</a>
+                    <a href="#activity" class="btn">활동 내용</a>
+                    <a href="#contact" class="btn">지원하기</a>
+                </div>
+            </div>
+        </header>
+
+        <!-- 헬로 월드 소개 -->
+        <section id="about" class="section">
+            <h2>헬로 월드란?</h2>
+            <p><span class="highlight">서버 개발과 컴퓨터 시스템</span>에 관심 있는 학생들이 모여 함께 공부하고 프로젝트를 진행하는 동아리입니다.</p>
+            <p>우리는 프로그래밍 기본부터 웹 서버 구축, 데이터베이스 설계, 클라우드 컴퓨팅 등 다양한 주제를 학습하고 실습합니다.</p>
+            <div class="video-container">
+                <iframe src="https://www.youtube.com/embed/7T1gFGIA1e4" allowfullscreen></iframe>
+            </div>
+        </section>
+
+        <!-- 학습 분야 -->
+        <section class="section">
+            <h2>주요 학습 분야</h2>
+            <div class="skills">
+                <div class="skill"><p>서버 개발</p><div class="skill-bar"><div class="skill-level" style="width: 90%;">90%</div></div></div>
+                <div class="skill"><p>데이터베이스</p><div class="skill-bar"><div class="skill-level" style="width: 85%;">85%</div></div></div>
+                <div class="skill"><p>네트워크 보안</p><div class="skill-bar"><div class="skill-level" style="width: 80%;">80%</div></div></div>
+                <div class="skill"><p>클라우드 컴퓨팅</p><div class="skill-bar"><div class="skill-level" style="width: 75%;">75%</div></div></div>
+            </div>
+        </section>
+
+        <!-- 동아리 활동 -->
+        <section id="activity" class="section">
+            <h2>동아리 활동</h2>
+            <div class="activity"><div class="activity-icon"><i class="fas fa-laptop-code"></i></div><div><h3>정기 모임</h3><p>매주 수요일 오후 4시, 컴퓨터실에서 정기 모임을 가집니다. 새로운 기술을 배우고 함께 토론합니다.</p></div></div>
+            <div class="activity"><div class="activity-icon"><i class="fas fa-project-diagram"></i></div><div><h3>프로젝트 진행</h3><p>웹 서비스, 모바일 앱, 게임 등 다양한 프로젝트를 팀별로 개발합니다.</p></div></div>
+            <div class="activity"><div class="activity-icon"><i class="fas fa-graduation-cap"></i></div><div><h3>특강 및 워크숍</h3><p>현업 개발자 초청 특강, 해커톤, 코딩 경진대회 등을 개최합니다.</p></div></div>
+
+            <h3>활동 사진</h3>
+            <div class="gallery">
+                <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=500&q=80" class="gallery-img">
+                <img src="https://images.unsplash.com/photo-1568992687947-868a62a9f521?auto=format&fit=crop&w=500&q=80" class="gallery-img">
+                <img src="https://images.unsplash.com/photo-1535223289827-42f1e9919769?auto=format&fit=crop&w=500&q=80" class="gallery-img">
+                <img src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&w=500&q=80" class="gallery-img">
+            </div>
+        </section>
+
+        <!-- 프로젝트 -->
+        <section class="section">
+            <h2>우리의 프로젝트</h2>
+            <div class="projects">
+                <div class="project"><img src="https://images.unsplash.com/photo-1551650975-87deedd944c3?auto=format&fit=crop&w=500&q=80" class="project-img"><div class="project-content"><h3>학생 포트폴리오 시스템</h3><p>동아리 회원들의 프로젝트를 전시할 수 있는 웹 포트폴리오 시스템입니다.</p></div></div>
+                <div class="project"><img src="https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=500&q=80" class="project-img"><div class="project-content"><h3>동아리 관리 플랫폼</h3><p>회원 관리 및 일정 관리 시스템으로 동아리 운영을 효율화합니다.</p></div></div>
+                <div class="project"><img src="https://images.unsplash.com/photo-1542744094-3a31f272c490?auto=format&fit=crop&w=500&q=80" class="project-img"><div class="project-content"><h3>코딩 학습 커뮤니티</h3><p>지식 공유와 질의응답이 가능한 온라인 커뮤니티 플랫폼입니다.</p></div></div>
+            </div>
+        </section>
+
+        <!-- 지원 -->
+        <section id="contact" class="section">
+            <h2>지원하기</h2>
+            <p>헬로 월드 동아리에 관심 있으신가요? 언제든 환영합니다!</p>
+            <p>지원 방법: 매주 수요일 정기 모임에 참석하거나 이메일로 문의해주세요.</p>
+            <p>Email: hello@helloworld-club.com</p>
+            <p>장소: 본관 3층 컴퓨터실</p>
+            <a href="mailto:hello@helloworld-club.com" class="btn">지원 문의하기</a>
+        </section>
+    </div>
+
+    <footer>
+        <p>© 2023 헬로 월드 동아리. All Rights Reserved.</p>
+        <div class="social-icons">
+            <a href="#"><i class="fab fa-facebook"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-youtube"></i></a>
+            <a href="#"><i class="fab fa-github"></i></a>
+            <a href="#"><i class="fab fa-discord"></i></a>
+        </div>
+    </footer>
+</body>
+</html>
